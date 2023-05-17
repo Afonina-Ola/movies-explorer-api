@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const { celebrate, Joi } = require('celebrate');
 const { errors } = require('celebrate');
-const { urlValidator } = require('./errors/url-validator');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
 const userRouter = require('./routes/users');
 const movieRouter = require('./routes/movies');
 
@@ -22,6 +22,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 mongoose.connect('mongodb://127.0.0.1:27017/bitfilmsdb', {
   useNewUrlParser: true,
 });
+
+app.use(requestLogger); // подключаем логгер запросов
 
 app.post('/signin', celebrate({
   body: Joi.object().keys({
@@ -44,7 +46,29 @@ app.use('/users', userRouter);
 
 app.use('/movies', movieRouter);
 
+app.use(() => {
+  throw new NotFoundError('Запрашиваемый ресурс не найден');
+});
+
+app.use(errorLogger); // подключаем логгер ошибок
+
+app.use(errors());
+
+app.use((err, req, res, next) => {
+  const { statusCode = 500, message } = err;
+  res
+    .status(statusCode)
+    .send({
+      message: statusCode === ERROR_CODES.SERVER_ERROR
+        ? 'На сервере произошла ошибка'
+        : message,
+    });
+  next();
+});
+
 app.listen(PORT, () => {
   // Если всё работает, консоль покажет, какой порт приложение слушает
   console.log(`App listening on port ${PORT}`);
 });
+
+
