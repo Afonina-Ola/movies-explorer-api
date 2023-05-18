@@ -2,8 +2,7 @@ const movieRouter = require('express').Router();
 const { celebrate, Joi } = require('celebrate');
 const { urlValidator } = require('../errors/url-validator');
 
-const {
-  getMovies, createMovie, deleteMovie } = require('../controllers/movies');
+const { getMovies, createMovie, deleteMovie } = require('../controllers/movies');
 
 // возвращает все сохранённые текущим  пользователем фильмы
 movieRouter.get('/', getMovies);

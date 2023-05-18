@@ -1,9 +1,8 @@
 const userRouter = require('express').Router();
 const { celebrate, Joi } = require('celebrate');
-const { urlValidator } = require('../errors/url-validator');
 
 const {
- updateUser, getUserInfo,
+  updateUser, getUserInfo,
 } = require('../controllers/users');
 
 // обновляет информацию о пользователе (email и имя)

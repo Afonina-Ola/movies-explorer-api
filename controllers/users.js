@@ -12,7 +12,7 @@ module.exports.getUserInfo = (req, res, next) => {
 };
 
 module.exports.updateUser = (req, res, next) => {
-  const { email, name  } = req.body;
+  const { email, name } = req.body;
   User.findByIdAndUpdate(
     req.user._id,
     { email, name },
@@ -43,16 +43,10 @@ module.exports.login = (req, res, next) => {
 };
 
 module.exports.createUser = (req, res, next) => {
-  const {
-    email, password, name
-  } = req.body;
+  const { email, password, name } = req.body;
   bcrypt.hash(password, 10)
-    .then((hash) => User.create({
-      email, password: hash, name
-    }))
-    .then(() => res.send({
-      email, name
-    }))
+    .then((hash) => User.create({ email, password: hash, name }))
+    .then(() => res.send({ email, name }))
     .catch((err) => {
       if (err.name === 'ValidationError') {
         const error = new ErrorCode('Переданы некорректные данные в методы создания пользователя');

@@ -10,11 +10,27 @@ module.exports.getMovies = (req, res, next) => {
 };
 
 module.exports.createMovie = (req, res, next) => {
-  const { country, director, duration, year, description, image, trailerLink, thumbnail, movieId, nameRU, nameEN } = req.body;
-  Movie.create({ country, director, duration, year, description, image, trailerLink, thumbnail, movieId, nameRU, nameEN, owner: req.user._id })
+  const {
+    country, director, duration, year, description, image,
+    trailerLink, thumbnail, movieId, nameRU, nameEN,
+  } = req.body;
+  Movie.create({
+    country,
+    director,
+    duration,
+    year,
+    description,
+    image,
+    trailerLink,
+    thumbnail,
+    movieId,
+    nameRU,
+    nameEN,
+    owner: req.user._id,
+  })
     .then((movie) => res.send(movie))
     .catch((err) => {
-      console.log(err, 'err')
+      console.log(err, 'err');
       if (err.name === 'ValidationError') {
         const error = new ErrorCode('Переданы некорректные данные в методы создания фильма');
         next(error);
@@ -47,4 +63,3 @@ module.exports.deleteMovie = (req, res, next) => {
       } else { next(err); }
     });
 };
-

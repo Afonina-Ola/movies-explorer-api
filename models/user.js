@@ -13,7 +13,7 @@ const userSchema = new mongoose.Schema({
         return validator.isEmail(email);
       },
       message: 'Введен некорректный email',
-    }
+    },
   },
   password: {
     type: String,
