@@ -26,7 +26,12 @@ module.exports.updateUser = (req, res, next) => {
       if (err.name === 'ValidationError') {
         const error = new ErrorCode('Переданы некорректные данные в методы создания пользователя');
         next(error);
-      } else { next(err); }
+      } else if (err.code === 11000) {
+        const error = new ConflictCode('Пользователь с таким email уже существует');
+        next(error);
+      } else {
+        next(err);
+      }
     });
 };
 

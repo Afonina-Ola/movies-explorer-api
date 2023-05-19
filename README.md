@@ -14,3 +14,6 @@
 ## Ссылка на репозиторий
 
 https://github.com/Afonina-Ola/movies-explorer-api
+
+## Адрес домена
+https://api.homamovie.nomoredomains.monster

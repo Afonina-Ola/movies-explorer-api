@@ -10,8 +10,8 @@ movieRouter.get('/', getMovies);
 // создаёт фильм
 movieRouter.post('/', celebrate({
   body: Joi.object().keys({
-    country: Joi.string().min(2).max(30).required(),
-    director: Joi.string().min(2).max(30).required(),
+    country: Joi.string().required(),
+    director: Joi.string().required(),
     duration: Joi.number().required(),
     year: Joi.string().required(),
     description: Joi.string().required(),
