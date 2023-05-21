@@ -30,7 +30,6 @@ module.exports.createMovie = (req, res, next) => {
   })
     .then((movie) => res.send(movie))
     .catch((err) => {
-      console.log(err, 'err');
       if (err.name === 'ValidationError') {
         const error = new ErrorCode('Переданы некорректные данные в методы создания фильма');
         next(error);

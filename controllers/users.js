@@ -24,7 +24,7 @@ module.exports.updateUser = (req, res, next) => {
     .then((user) => res.send(user))
     .catch((err) => {
       if (err.name === 'ValidationError') {
-        const error = new ErrorCode('Переданы некорректные данные в методы создания пользователя');
+        const error = new ErrorCode('Переданы некорректные данные при редактировании данных пользователя');
         next(error);
       } else if (err.code === 11000) {
         const error = new ConflictCode('Пользователь с таким email уже существует');
