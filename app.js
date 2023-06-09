@@ -1,9 +1,11 @@
 require('dotenv').config();
 const express = require('express');
+const cors = require('cors');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const { celebrate, Joi } = require('celebrate');
 const { errors } = require('celebrate');
+const { options } = require('./utils/constants');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const userRouter = require('./routes/users');
 const movieRouter = require('./routes/movies');
@@ -15,6 +17,8 @@ const { PORT = 3000 } = process.env;
 const app = express();
 const { ERROR_CODES } = require('./utils/constants');
 const NotFoundError = require('./errors/not-found-error');
+
+app.use('*', cors(options));
 
 app.use(bodyParser.json());
 
