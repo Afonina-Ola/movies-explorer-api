@@ -9,7 +9,8 @@ const ERROR_CODES = {
 
 const options = {
   origin: ['http://localhost:3000', 'https://api.homamovie.nomoredomains.monster',
-    'http://api.homamovie.nomoredomains.monster', 'https://github.com/Afonina-Ola/movies-explorer-api'],
+    'http://api.homamovie.nomoredomains.monster', 'https://homamovie.nomoredomains.rocks',
+    'http://homamovie.nomoredomains.rocks', 'https://github.com/Afonina-Ola/movies-explorer-api'],
   methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
   preflightContinue: false,
   optionsSuccessStatus: 204,
